@@ -13,7 +13,9 @@ gulp.task('build', function () {
     return browserify({entries: './src/js/main.js', debug: true})
         .transform("babelify", { presets: ["es2015"] })
         .bundle()
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: onError
+		}))
         .pipe(source('app.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init())
@@ -25,7 +27,9 @@ gulp.task('build', function () {
 
 gulp.task('sass', function(){
 	gulp.src('./src/scss/**/*.scss')
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: onError
+		}))
 		.pipe(sass())
 		.pipe(gulp.dest('./build/css'))
 });
@@ -37,3 +41,8 @@ gulp.task('watch', ['build'], function () {
 });
  
 gulp.task('default', ['build', 'sass', 'watch']);
+
+var onError = function (err) {  
+  gutil.beep();
+  console.log(err.toString());
+};

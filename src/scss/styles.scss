@@ -1,26 +1,39 @@
-.main_div{
-    background-color: rgb(49, 191, 54);
-    width: 200px;
+.board{
+    background-color: #bbdefb;
+    width: 500px;
     height: 500px;
     padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content:space-around;
 
-    .item{
+    .card{
         margin: 10px;
-        width: 50px;
-        height: 50px;
-        background-color: rgb(166, 166, 166);
-    }
-}
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
 
-.red_theme{
-    background-color: rgb(213, 64, 82);
+        &-front{
+            background-color: #8aacc8;
+        }
+
+        &-back{
+            background-color: #eeffff;
+            display: none;
+        }
+    }
+
+    .completed{
+        background-color: #087f23;
+        cursor: default;
+    }
 }
 
 .title{
     margin-bottom: 10px;
 
     .title-text{
-        color: rgb(0, 79, 255);
+        color: black;
         font-weight: bold;
         font-size: 20px;
     }
