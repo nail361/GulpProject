@@ -1,11 +1,13 @@
 .board{
     background-color: #bbdefb;
-    width: 500px;
-    height: 500px;
+    max-width: 500px;
     padding-top: 10px;
     display: flex;
     flex-wrap: wrap;
     align-content:space-around;
+    position:relative;
+    z-index: 1;
+    perspective: 1000px;
 
     .card{
         margin: 10px;
@@ -13,20 +15,44 @@
         height: 80px;
         cursor: pointer;
 
+        position: relative;
+        transform-style: preserve-3d;
+        transition: .7s ease-in-out;
+
+        &.flip{
+            transform: rotateY(180deg);
+        }
+
+        &-front,&-back{
+            position: absolute;
+            backface-visibility: hidden;
+
+            width: 100%;
+            height: 100%;
+        }
+
         &-front{
             background-color: #8aacc8;
+            z-index: 2;
+            transform: rotateY(0deg);
         }
 
         &-back{
             background-color: #eeffff;
-            display: none;
+            transform: rotateY(-180deg);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            user-select:none;
+
+            &.completed{
+                background-color: #087f23;
+                color: white;
+                cursor: default;
+            }
         }
     }
 
-    .completed{
-        background-color: #087f23;
-        cursor: default;
-    }
 }
 
 .title{
